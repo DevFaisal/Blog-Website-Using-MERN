@@ -1,7 +1,8 @@
 import express from "express";
-import router from './Routes/User.js';
+import router from "./Routes/route.js";
 import cors from 'cors'
 import connectDB from "./connection.js";
+import JWT from 'jsonwebtoken'
 
 const app = express();
 const PORT = 8000

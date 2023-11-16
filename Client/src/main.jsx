@@ -6,7 +6,8 @@ import Layout from './Layout.jsx'
 import Home from './components/Home.jsx'
 import Login from './components/Credentials/Login.jsx'
 import Register from './components/Credentials/Register.jsx'
-import Post from './components/Post.jsx'
+import Post from './components/Blog.jsx'
+import Write from './components/Write.jsx';
 
 const user = true;
 const router = createBrowserRouter(
@@ -15,7 +16,8 @@ const router = createBrowserRouter(
       <Route path='/login' element={<Login />} />
       <Route path='/regsiter' element={<Register />} />
       <Route path='/home' element={<Home />} />
-      <Route path='/post' element={<Post />} />
+      <Route path='/blog/:id' element={<Post />} />
+      <Route path='/write' element={<Write />} />
     </Route>
   ))
 

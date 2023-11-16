@@ -3,7 +3,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const showToastMessage = (message, isError = false) => {
     toast[isError ? "error" : "success"](message, {
-        position: "bottom-center",
+        position: "bottom-left",
         autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: false,
