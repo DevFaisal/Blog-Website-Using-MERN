@@ -2,13 +2,17 @@ import express from "express";
 import router from "./Routes/route.js";
 import cors from 'cors'
 import connectDB from "./connection.js";
-import JWT from 'jsonwebtoken'
+import cookieParser from "cookie-parser";
 
 const app = express();
 const PORT = 8000
 
-app.use(cors())
+app.use(cors({
+    origin: 'http://localhost:5173',  // Replace with the actual origin of your frontend
+    credentials: true,                // it should be true otherwisw you will not get cookie
+}));
 app.use(router)
+app.use(cookieParser())
 express.urlencoded({ extended: true })
 
 

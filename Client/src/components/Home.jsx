@@ -1,49 +1,42 @@
-import React, { useEffect, useState } from "react";
+import React from 'react'
 import { Link } from 'react-router-dom';
-import axios from "axios";
-import Search from "./Search";
-
 
 function Home() {
-    const [blogs, setBlogs] = useState([]);
-
-    useEffect(() => {
-        axios.get('http://localhost:8000/blogs')
-            .then((res) => {
-                setBlogs(res.data);
-            })
-            .catch((error) => {
-                console.error("Error fetching blogs:", error);
-            });
-    }, []);
-
+    const image = "https://images.unsplash.com/photo-1606636660488-16a8646f012c?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     return (
         <>
-            <Search />
 
-            <div className="grid sm:grid-cols-2 md:grid-cols-4 grid-flow-row gap-4 p-20 shadow-md">
-                {blogs.map((blog, index) => (
-                    <div key={index} className="bg-teal-200 w-72 h-auto rounded-md hover:translate-y-2 duration-200 cursor-pointer">
-                        <img
-                            className="rounded-t-md"
-                            src="https://images.pexels.com/photos/5779600/pexels-photo-5779600.jpeg?auto=compress&cs=tinysrgb&w=600"
-                            alt=""
-                        />
-                        <h1 className="text-2xl font-bold py-4 text-center">{blog.title}</h1>
-                        <p className="p-3 text-emerald-900 h-20 overflow-hidden pb-5">
-                            {blog.content.slice(0, 70)}...
-                        </p>
-                        <div className="flex justify-end pb-2 px-4">
-                            <Link to={`/blog/${blog._id}`} className="px-5 py-2 text-white text-sm font-semibold bg-emerald-950 rounded-md border-1">
-                                Read
-                            </Link>
-                        </div>
+            <div
+                className="bg-cover bg-fixed w-full h-[600px]"
+                style={{
+                    backgroundImage: `url('${image}')`,
+                }}
+            >
+                <div className='flex flex-col gap-6 justify-center items-center h-80 pt-40'>
+                    <h1 className='text-4xl font-semibold'>Publish your passions, your way</h1>
+                    <h3 className='text-slate-500'>Create a unique and beautiful blog easily.</h3>
+                    <Link to={'/login'}><button className='px-4 py-3 outline-none hover:bg-orange-600 bg-orange-500 rounded-md text-sm font-semibold text-white'>CREATE YOUR BLOG</button></Link>
+                </div>
+            </div>
+            <div className="w-full h-96 bg-slate-300">
+                <div className='w-[50%] justify-start p-20 items-center h-96'>
+                    <div className='flex flex-col gap-5 '>
+                        <h1 className='text-5xl font-semibold'>Choose the perfect design</h1>
+                        <h3 className='text-slate-500 text-xl text-justify'>Create a beautiful blog that fits your style. Choose from a selection of easy-to-use templates – all with flexible layouts and hundreds of background images – or design something new.</h3>
                     </div>
-                ))}
+                </div>
+            </div>
+            <div className="w-full h-96 bg-slate-200">
+                <div className='flex justify-end p-20 h-96'>
+                    <div className='flex  w-[50%] items-start  flex-col gap-5 '>
+                        <h1 className='text-5xl font-semibold'>Know your audience</h1>
+                        <h3 className='text-slate-500 text-xl text-justify'>Create a beautiful blog that fits your style. Choose from a selection of easy-to-use templates – all with flexible layouts and hundreds of background images – or design something new.</h3>
+                    </div>
+                </div>
             </div>
 
         </>
-    );
+    )
 }
 
-export default Home;
+export default Home

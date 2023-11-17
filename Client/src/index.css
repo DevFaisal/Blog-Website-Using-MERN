@@ -3,7 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
   body {
-    background-color: rgb(2 44 34)
+    background-color: whitesmoke;
+    font-family: "Poppins", sans-serif;
   }
 }

@@ -32,20 +32,18 @@ function Write() {
     }
 
 
-
-
     return (
         <>
             <ToastContainer />
-            <div className='flex flex-col items-center gap-3 mt-10 text-white font-bold justify-center pt-20text-white'>
-                <h1 className='text-3xl pt-4'>Write Your Blog</h1>
-                <p className='w-96 h-0.5 bg-gray-500'></p>
+            <div className='flex flex-col items-center gap-3 mt-20 md:mt-36 m-10 font-bold justify-center'>
+                <h1 className='text-2xl md:text-4xl pt-4'>Write Your Blog</h1>
+                <p className='w-40 md:w-96 h-0.5 bg-gray-500'></p>
                 <p>
-                    <span className='pl-3 text-xl'> <i class="fa-solid fa-plus"></i></span>
-                    <input className='text-2xl bg-emerald-950 font-semibold border-none w-96 px-3 py-2 outline-none' type="text" placeholder='Title' value={title} onChange={e => setTitle(e.target.value)} />
+                    <span className='pl-10 md:pl-3 text-xl'> <i className="fa-solid fa-plus"></i></span>
+                    <input className='text-2xl w-56 text-orange-800 bg-slate-100 font-bold border-none md:w-96 px-3 py-2 outline-none' type="text" placeholder='Title' value={title} onChange={e => setTitle(e.target.value)} />
                 </p>
-                <textarea className='font-semibold bg-emerald-950 border-none outline-none w-[500px] h-80 text-xl' type="text" placeholder='Tell your Story...' value={content} onChange={e => setContent(e.target.value)}></textarea>
-                <button onClick={handlePublish} className='px-4 py-2 text-md font-semibold text-black rounded-md bg-emerald-400'>Publish</button>
+                <textarea className='font-semibold bg-slate-300 rounded-md p-2 text-md border-none outline-none w-80 md:w-[500px] h-80' type="text" placeholder='Tell your Story...' value={content} onChange={e => setContent(e.target.value)}></textarea>
+                <button onClick={handlePublish} className='px-4 py-2 text-md font-semibold text-black rounded-md bg-slate-400'>Publish</button>
             </div>
         </>
     )

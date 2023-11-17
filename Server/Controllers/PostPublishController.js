@@ -23,7 +23,6 @@ const handleBlogs = async (req, res) => {
     try {
         const allBlogs = await Blogs.find();
         res.status(200).json(allBlogs);
-        console.log(allBlogs)
     }
     catch (err) {
         console.log(err)

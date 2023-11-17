@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
 const connectDB = () => {
-    const username = "faisalfarooq";
-    const password = "Sopore@123"; // Update with your actual password
-    const clusterAddress = "@cluster0.mi9kmil.mongodb.net";
+    // const username = "faisalfarooq";
+    // const password = "Sopore@123"; // Update with your actual password
+    // const clusterAddress = "@cluster0.mi9kmil.mongodb.net";
     const databaseName = "Users";
 
     // Construct the connection string with encoded password
