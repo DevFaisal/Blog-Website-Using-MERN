@@ -18,9 +18,8 @@ function Write() {
                 .then((res) => {
                     showToastMessage(res.data.message)
                     setTimeout((e) => {
-                        nav('/home')
+                        nav('/allBlogs')
                     }, 4000)
-
 
                 }).catch((error) => {
                     showToastMessage(error.response.message, true)

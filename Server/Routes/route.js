@@ -1,16 +1,18 @@
 import express from 'express';
-import { handleLogin, handleRegistation } from "../Controllers/UserController.js"
+import { handleLogin, handleRegistration, handleLogOut, refreshUser } from "../Controllers/UserController.js"
 import { handlePublish, handleBlogs } from './../Controllers/PostPublishController.js';
-import cors from 'cors'
-
+import cookieParser from 'cookie-parser';
 
 const router = express.Router()
+router.use(cookieParser())
 router.use(express.json())
 
 
 //User Routes
-router.post("/login",handleLogin)
-router.post("/register", handleRegistation)
+router.post("/login", handleLogin)
+router.post("/register", handleRegistration)
+router.get("/logout", handleLogOut)
+router.get("/refresh", refreshUser)
 
 
 //Post Publish Router

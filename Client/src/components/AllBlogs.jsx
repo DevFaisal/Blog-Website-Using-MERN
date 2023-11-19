@@ -1,22 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
-import axios from "axios";
 import Search from "./Search";
+import { BlogContext } from "../Context/BlogsContext";
 
 
 function AllBlogs() {
-    const [blogs, setBlogs] = useState([]);
-
-    useEffect(() => {
-        axios.get('http://localhost:8000/blogs')
-            .then((res) => {
-                setBlogs(res.data);
-            })
-            .catch((error) => {
-                console.error("Error fetching blogs:", error);
-            });
-    }, []);
-
+    const { blogs } = useContext(BlogContext)
     return (
         <>
             <Search />

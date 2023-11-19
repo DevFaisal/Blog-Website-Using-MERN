@@ -1,62 +1,67 @@
 import User from "../Models/User.js";
-import JWT from 'jsonwebtoken'
-const secret = "abcdefc"
-
-
+import JWT from 'jsonwebtoken';
 
 const handleLogin = async (req, res) => {
-    const { email, password } = req.body
-    const newUser = await User.findOne({ email: email })
+    const { email, password } = req.body;
+   
+    try {
+        const user = await User.findOne({ email: email });
 
-    if (newUser) {
-        try {
-            const validatePassword = await newUser.isPasswordCorrect(password)
-            if (validatePassword) {
-                const token = JWT.sign({ id: newUser._id }, secret, { expiresIn: "2d" });
+        if (user) {
+            const isPasswordValid = await user.isPasswordCorrect(password);
+
+            if (isPasswordValid) {
+                const token = JWT.sign({ id: user._id, fullName: user.fullName, email: user.email }, process.env.JWT_SECRET, { expiresIn: "2d" });
                 res.cookie("JwtToken", token).status(200).json({ message: "Login Success" });
+            } else {
+                res.status(401).json({ message: "Invalid Password" });
             }
-            else {
-                res.status(410).json({ message: "Invalid Password" })
-            }
+        } else {
+            res.status(404).json({ message: "User not found" });
         }
-        catch (error) {
-            res.status(500).json({ message: "Internal Server Error" })
-        }
+    } catch (error) {
+        res.status(500).json({ message: "Internal Server Error", error: error.message });
     }
-    else {
-        res.status(409).json({ message: "No Such User Found" })
-    }
-}
-const handleLogOut = async (req, res) => {
+};
+
+const handleLogOut = (req, res) => {
+    res.clearCookie("JwtToken").status(200).json({ message: 'Logout Success' });
+};
+
+const handleRegistration = async (req, res) => {
+    const { fullName, email, password } = req.body;
+
     try {
-        res.clearCookie("JwtToken").status(200).json({ message: "Login Success" });
-    }
-    catch (err) {
-        
-    }
-}
+        const existingUser = await User.findOne({ email: email });
 
-const handleRegistation = async (req, res) => {
-    const { fullName, email, password } = req.body
-    const newUser = await User.findOne({ email: email })
-    try {
-        if (!newUser) {
-
-            await User.create({
-                fullName,
-                email,
-                password
-            })
-            res.status(200).json({ message: `Welcome ${fullName}` });
-
-        }
-        else {
+        if (!existingUser) {
+            await User.create({ fullName, email, password });
+            res.status(201).json({ message: `Welcome ${fullName}` });
+        } else {
             res.status(409).json({ message: "User already registered" });
         }
+    } catch (err) {
+        res.status(500).json({ error: `Internal Server Error: ${err.message}` });
     }
-    catch (err) {
-        res.status(500).json({ error: "Internal Server Error" });
+};
+
+const refreshUser = (req, res) => {
+    const token = req.cookies && req.cookies.JwtToken;
+
+    if (!token) {
+        return res.status(401).json({ error: "Token not found" });
     }
 
-}
-export { handleLogin, handleRegistation }
+    const tokenSecret = process.env.JWT_SECRET;
+
+    JWT.verify(token, tokenSecret, (err, verified) => {
+        if (err) {
+            console.error("Error verifying token:", err);
+            return res.status(401).json({ error: "Invalid token" });
+        } else {
+            return res.status(200).json(verified);
+        }
+    });
+};
+
+export { handleLogin, handleRegistration, handleLogOut, refreshUser };

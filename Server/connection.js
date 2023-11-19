@@ -2,12 +2,12 @@ import mongoose from "mongoose";
 
 const connectDB = () => {
     // const username = "faisalfarooq";
-    // const password = "Sopore@123"; // Update with your actual password
+    // const password = "Sopore@123"; 
     // const clusterAddress = "@cluster0.mi9kmil.mongodb.net";
-    const databaseName = "Users";
+    const databaseName = "ByteBurstBlogs";
 
     // Construct the connection string with encoded password
-    const connectionString = `mongodb://127.0.0.1:27017/${databaseName}`;
+    const connectionString = `${process.env.MONGODB_URI}/${databaseName}`;
 
     mongoose.connect(connectionString)
         .then(() => console.log("MongoDB Connected"))

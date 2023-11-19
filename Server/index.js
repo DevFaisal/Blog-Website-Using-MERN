@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import express from "express";
 import router from "./Routes/route.js";
 import cors from 'cors'
@@ -5,7 +6,7 @@ import connectDB from "./connection.js";
 import cookieParser from "cookie-parser";
 
 const app = express();
-const PORT = 8000
+const PORT = process.env.PORT
 
 app.use(cors({
     origin: 'http://localhost:5173',  // Replace with the actual origin of your frontend
@@ -13,7 +14,7 @@ app.use(cors({
 }));
 app.use(router)
 app.use(cookieParser())
-express.urlencoded({ extended: true })
+app.use(express.urlencoded({ extended: true }));
 
 
 connectDB();

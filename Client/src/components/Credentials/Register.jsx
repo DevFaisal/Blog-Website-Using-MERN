@@ -32,7 +32,7 @@ function Register() {
     return (
         <>
             <ToastContainer />
-            <div className='flex justify-center items-center m-20 md:mt-30 h-96 '>
+            <div className='flex justify-center items-center m-20 md:mt-30 h-screen'>
                 <div className='flex flex-col py-6 px-5 w-[400px]  bg-slate-500 rounded-md'>
                     <h1 className='text-3xl font-semibold text-center'>Regsiter</h1>
                     <label className='font-semibold' htmlFor="">Full Name:</label>

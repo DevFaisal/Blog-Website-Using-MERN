@@ -1,30 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import axios from "axios";
 import { useParams } from 'react-router-dom';
+import { BlogContext } from '../Context/BlogsContext';
 function Blog() {
 
     const { id } = useParams()
-    const [blogs, setBlogs] = useState([]);
+    // const [blogs, setBlogs] = useState([]);
     const [selectedBlog, setSelectedBlog] = useState({})
     const [content, setcontent] = useState('')
 
-
+    const { blogs } = useContext(BlogContext)
     useEffect(() => {
-        axios.get('http://localhost:8000/blogs')
-            .then((res) => {
-                setBlogs(res.data);
-                findBlog(res.data);
-            })
-            .catch((error) => {
-                console.error("Error fetching blogs:", error);
-            });
-
-    }, []);
-
-    const findBlog = (blogs) => {
         const selectedBlog = blogs.find((blog) => blog._id === id);
         setSelectedBlog(selectedBlog || {});
-    }
+    }, [blogs])
+
     const handleUpdate = () => {
 
     }

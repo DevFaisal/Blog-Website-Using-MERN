@@ -5,7 +5,7 @@ function Footer() {
     return (
         <>
 
-            <div className='md:flex justify-between p-10 w-full bg-slate-900 h-76 text-white'>
+            <div className='md:grid grid-cols-2 p-10   w-full bg-slate-900 h-[70%] text-white'>
                 <div className='flex flex-col gap-4'>
 
                     <Link to={'/home'}>
@@ -21,8 +21,8 @@ function Footer() {
                         <li>Terms of Service</li>
                     </ul>
                 </div>
+                <div> <p className='text-center md:text-sm text-[12px] bg-slate-900 text-slate-400'>Site Credits: Developed by <span className='font-semibold'><Link to={"www.devfaisal.netlify.app"}>Faisal</Link></span></p></div>
             </div>
-            <p className='text-center md:text-sm text-[12px] bg-slate-900 text-slate-400'>Site Credits: Developed by <span className='font-semibold'><Link to={"www.devfaisal.netlify.app"}>Faisal</Link></span></p>
 
         </>
     )

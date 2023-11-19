@@ -6,24 +6,24 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from '../../Context/UserContext';
 function Login() {
 
-    const { SetUser } = useContext(UserContext)
+    const { SetUser, getUser } = useContext(UserContext)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    
+
     const nav = useNavigate();
 
     const logIn = () => {
-
-
-        if (!email && !password) showToastMessage("Enter Details", true)
+        if (!email && !password) return showToastMessage("Enter Details", true)
         try {
             axios.post('http://localhost:8000/login', { email, password }, { withCredentials: true })
                 .then((res) => {
+                    getUser();
                     SetUser(true)
                     nav('/allBlogs')
                 })
                 .catch((error) => {
-                    showToastMessage(error, true)
+                    console.log(error)
+                    showToastMessage(error.response.data.message, true)
                 })
         }
         catch (err) {
@@ -34,7 +34,7 @@ function Login() {
     return (
         <>
             <ToastContainer />
-            <div className='flex justify-center items-center m-20 md:mt-30 h-96 '>
+            <div className='flex justify-center items-center  md:mt-30 h-screen'>
                 <div className='flex flex-col py-6 px-5 w-[400px]  bg-slate-500 rounded-md'>
                     <h1 className='text-3xl font-semibold text-center'>Login</h1>
                     <label className='font-semibold' htmlFor="">Email:</label>

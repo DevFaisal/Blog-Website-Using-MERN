@@ -10,14 +10,15 @@ import AllBlogs from './components/AllBlogs.jsx'
 import Home from './components/Home.jsx'
 import './index.css'
 import { UserContextProvider } from './Context/UserContext';
+import { BlogContextProvider } from './Context/BlogsContext.jsx'
 
 
 const router = createBrowserRouter(
   createRoutesFromElements(
 
     <Route path='/' element={<Layout />}>
-      <Route path='/login' element={<Login />} />
       <Route path='/home' element={<Home />} />
+      <Route path='/login' element={<Login />} />
       <Route path='/register' element={<Register />} />
       <Route path='/allBlogs' element={<AllBlogs />} />
       <Route path='/blog/:id' element={<SingleBlog />} />
@@ -25,13 +26,15 @@ const router = createBrowserRouter(
     </Route>
 
   ))
-  
+
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <UserContextProvider>
-    <RouterProvider router={router}>
-      <React.StrictMode>
-      </React.StrictMode>,
-    </RouterProvider>
-  </UserContextProvider>
+  <BlogContextProvider>
+    <UserContextProvider>
+      <RouterProvider router={router}>
+        <React.StrictMode>
+        </React.StrictMode>,
+      </RouterProvider>
+    </UserContextProvider>
+  </BlogContextProvider >
 
 )
